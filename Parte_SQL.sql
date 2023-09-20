@@ -21,7 +21,7 @@ group by --v.[Date],
 	--v.UnitPrice, 
 	v.Quantity
 order by TotalProdutosVendidos desc
---------------------------------------------------------
+----------------------------------------------------------------------------------------
 select
 	--v.[Date],
 	p.[Name],
@@ -40,10 +40,10 @@ group by --v.[Date],
 	--v.UnitPrice, 
 	v.Quantity
 order by TotalProdutosVendidos desc 
--------------------------------------------------------
+------------------------------------------------------------------------------------------
 --select * from Vendas
 --select * from Produtos
--------------------------------------------------------
+------------------------------------------------------------------------------------------
 -- 3) Total de produtos vendidos em 2019
 select
 	--v.[Date],
@@ -62,7 +62,7 @@ where
 	--v.Discount, 
 	--v.UnitPrice, 
 	--v.Quantity
---------------------------------------------------------
+-----------------------------------------------------------------------------------------
 -- 4) Receita Bruta em 2019
 select
 	--p.ID,
@@ -76,7 +76,7 @@ from Vendas v
 where
 	v.[Date] between '2019-01-01' and '2019-12-31'
 --group by v.Quantity, v.Discount, v.UnitPrice
----------------------------------------------------------
+----------------------------------------------------------------------------------------
 -- 5) Valor total de cada produto vendido em 2019
 select
 	p.[Name],
@@ -90,7 +90,7 @@ from Vendas v
 where v.[Date] between '2019-01-01' and '2019-12-31'
 group by p.[Name], v.UnitPrice, v.Discount, v.Quantity
 order by p.[Name]
------------------------------------------------------------
+----------------------------------------------------------------------------------------
 -- 6) Qual foi o produto que mais vendeu e em qual loja foram feitas essas vendas
 --select * from Lojas
 select top 1
@@ -107,7 +107,7 @@ group by
 	l.[Name], 
 	p.[Name]
 order by TotalVendas desc
-------------------------------------------------------------
+---------------------------------------------------------------------------------------
 -- 7) Qual foi a loja que mais vendeu em 2019
 select
 	l.[Name],
@@ -123,8 +123,10 @@ group by l.[Name]
 	--p.[Name], 
 	--v.Quantity
 order by TotalVendas desc
--------------------------------------------------------------
--- 8) Qual s„o os valores de ReceitaTotal, mÈdia, desvio padr„o e Mediana das vendas mensais de 2019
+-------------------------------------------------------------------------------------
+
+
+-- 8) Qual s√£o os valores de ReceitaTotal, m√©dia, desvio padr√£o e Mediana das vendas mensais de 2019
 select --v.[Date],
 	sum(v.quantity*v.unitprice - (v.quantity*v.Discount*v.unitprice)) as ReceitaBruta,
 	avg(v.quantity*v.unitprice - (v.quantity*v.Discount*v.unitprice)) as MediaReceitaBruta,
@@ -137,9 +139,9 @@ from Vendas v
 where v.[Date] between '2019-01-01' and '2019-12-31'
 --group by v.[Date]
 --order by v.[Date] asc
--------------------------------------------------------------
--- 9) Receita Total da empresa desde o inÌcio atÈ o presente momento
--- Com mÈdia, Mediana e Desvio Padr„o
+-------------------------------------------------------------------------------------
+-- 9) Receita Total da empresa desde o in√≠cio at√© o presente momento
+-- Com m√©dia, Mediana e Desvio Padr√£o
 select
 	sum(v.quantity*v.unitprice - (v.quantity*v.Discount*v.unitprice)) as ReceitaBruta,
 	avg(v.quantity*v.unitprice - (v.quantity*v.Discount*v.unitprice)) as MediaReceitaBruta,
@@ -149,8 +151,8 @@ select
     --    WITHIN GROUP (ORDER BY MediaReceitaBruta)
     --    OVER (PARTITION BY v.[date]) AS MedianReceitaBruta
 from Vendas v
---------------------------------------------------------------
--- 10) Para que seja possÌvel gerar gr·ficos, qual È a Receita Mensal Bruta da Empresa em 2019
+------------------------------------------------------------------------------------
+-- 10) Para que seja poss√≠vel gerar gr√°ficos, qual √© a Receita Mensal Bruta da Empresa em 2019
 -- Determine a curva de venda mensal no ano de 2019
 select 
 	month(v.[Date]) as Mes,
@@ -163,9 +165,9 @@ group by month(v.[Date])--,
 	--v.Discount, 
 	--v.UnitPrice
 order by Mes
-----------------------------------------------------------------
--- 11) Para que seja possÌvel gerar gr·ficos,
--- qual È o total de vendas efetuadas por cada loja em 2019
+------------------------------------------------------------------------------------
+-- 11) Para que seja poss√≠vel gerar gr√°ficos,
+-- qual √© o total de vendas efetuadas por cada loja em 2019
 select 
 	l.[Name],
 	sum(v.Quantity) as TotalVendasPorLoja
@@ -176,4 +178,4 @@ where v.[Date] between '2019-01-01' and '2019-12-31'
 group by 
 	l.[Name]
 order by l.[Name]
-----------------------------------------------------------
+------------------------------------------------------------------------------------
