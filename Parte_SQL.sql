@@ -124,34 +124,8 @@ group by l.[Name]
 	--v.Quantity
 order by TotalVendas desc
 -------------------------------------------------------------------------------------
-
-
--- 8) Qual são os valores de ReceitaTotal, média, desvio padrão e Mediana das vendas mensais de 2019
-select --v.[Date],
-	sum(v.quantity*v.unitprice - (v.quantity*v.Discount*v.unitprice)) as ReceitaBruta,
-	avg(v.quantity*v.unitprice - (v.quantity*v.Discount*v.unitprice)) as MediaReceitaBruta,
-	stdev(v.quantity*v.unitprice - (v.quantity*v.Discount*v.unitprice)) as DesvPadReceitaBruta
-	-- Ver como se calcula a mediana
-	--PERCENTILE_CONT(0.5) 
-    --    WITHIN GROUP (ORDER BY MediaReceitaBruta)
-    --    OVER (PARTITION BY v.[date]) AS MedianReceitaBruta
-from Vendas v
-where v.[Date] between '2019-01-01' and '2019-12-31'
---group by v.[Date]
---order by v.[Date] asc
+--- --- --- --- --- --- ---                                   --- --- --- --- --- ---
 -------------------------------------------------------------------------------------
--- 9) Receita Total da empresa desde o início até o presente momento
--- Com média, Mediana e Desvio Padrão
-select
-	sum(v.quantity*v.unitprice - (v.quantity*v.Discount*v.unitprice)) as ReceitaBruta,
-	avg(v.quantity*v.unitprice - (v.quantity*v.Discount*v.unitprice)) as MediaReceitaBruta,
-	stdev(v.quantity*v.unitprice - (v.quantity*v.Discount*v.unitprice)) as DesvPadReceitaBruta
-	-- Ver como se calcula a mediana
-	--PERCENTILE_CONT(0.5) 
-    --    WITHIN GROUP (ORDER BY MediaReceitaBruta)
-    --    OVER (PARTITION BY v.[date]) AS MedianReceitaBruta
-from Vendas v
-------------------------------------------------------------------------------------
 -- 10) Para que seja possível gerar gráficos, qual é a Receita Mensal Bruta da Empresa em 2019
 -- Determine a curva de venda mensal no ano de 2019
 select 
